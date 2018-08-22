@@ -113,16 +113,14 @@ func (b *Builder) build() error {
 		return b.logger.Errorf("error getting stdout pipe %s", err).ToError()
 	}
 
-	err = cmd.Start()
-	if err != nil {
+	if err = cmd.Start(); err != nil {
 		return b.logger.Errorf("error executing build command %s", err).ToError()
 	}
 
 	io.Copy(os.Stdout, stdout)
 	errBuf, _ := ioutil.ReadAll(stderr)
 
-	err = cmd.Wait()
-	if err != nil {
+	if err = cmd.Wait(); err != nil {
 		return b.logger.Errorf("error executing build %s", string(errBuf)).ToError()
 	}
 	b.logger.Info("build completed")
@@ -145,16 +143,14 @@ func (b *Builder) start() error {
 		return b.logger.Errorf("error getting stdout pipe %s", err).ToError()
 	}
 
-	err = cmd.Start()
-	if err != nil {
+	if err = cmd.Start(); err != nil {
 		return b.logger.Errorf("error executing restart command %s", err).ToError()
 	}
 
 	io.Copy(os.Stdout, stdout)
 	errBuf, _ := ioutil.ReadAll(stderr)
 
-	err = cmd.Wait()
-	if err != nil {
+	if err = cmd.Wait(); err != nil {
 		return b.logger.Errorf("error executing restart %s", string(errBuf)).ToError()
 	}
 	b.logger.Info("start completed")
