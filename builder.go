@@ -32,7 +32,7 @@ type Builder struct {
 
 func NewBuilder(options ...BuilderOption) *Builder {
 	pm := manager.NewManager(manager.WithRunInBackground(true))
-	log := logger.NewLogDefault("builder", logger.InfoLevel)
+	log := logger.NewLogDefault("builder", logger.DebugLevel)
 	event := make(chan *watcher.Event)
 
 	w := watcher.NewWatcher(watcher.WithLogger(log), watcher.WithManager(pm), watcher.WithEventChannel(event))
@@ -88,6 +88,7 @@ func (b *Builder) execute() error {
 
 				ev := <-b.event
 				if ev.Operation == watcher.OperationChanges {
+					fmt.Println(ev.File)
 					b.build()
 					b.start()
 				}
