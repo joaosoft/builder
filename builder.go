@@ -54,14 +54,14 @@ func NewBuilder(options ...BuilderOption) *Builder {
 	appConfig := &AppConfig{}
 	if simpleConfig, err := manager.NewSimpleConfig(fmt.Sprintf("/config/app.%s.json", GetEnv()), appConfig); err != nil {
 		service.logger.Error(err.Error())
-	} else {
+	} else if appConfig.Builder != nil {
 		service.pm.AddConfig("config_app", simpleConfig)
 		level, _ := logger.ParseLevel(appConfig.Builder.Log.Level)
 		service.logger.Debugf("setting log level to %s", level)
 		service.logger.Reconfigure(logger.WithLevel(level))
 	}
 
-	service.config = &appConfig.Builder
+	service.config = appConfig.Builder
 	service.Reconfigure(options...)
 
 	return service
