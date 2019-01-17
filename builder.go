@@ -44,6 +44,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		pm:         pm,
 		logger:     log,
 		quit:       make(chan int),
+		config:     NewConfig(),
 	}
 
 	if service.isLogExternal {
@@ -59,9 +60,9 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		level, _ := logger.ParseLevel(appConfig.Builder.Log.Level)
 		service.logger.Debugf("setting log level to %s", level)
 		service.logger.Reconfigure(logger.WithLevel(level))
+		service.config = appConfig.Builder
 	}
 
-	service.config = appConfig.Builder
 	service.Reconfigure(options...)
 
 	return service
