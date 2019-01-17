@@ -44,7 +44,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		pm:         pm,
 		logger:     log,
 		quit:       make(chan int),
-		config:     NewConfig(),
+		config:     &BuilderConfig{},
 	}
 
 	if service.isLogExternal {
