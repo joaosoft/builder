@@ -25,13 +25,13 @@ type BuilderConfig struct {
 }
 
 // NewConfig ...
-func NewConfig() *BuilderConfig {
+func NewConfig() (*BuilderConfig, error) {
 	appConfig := &AppConfig{}
 	if _, err := manager.NewSimpleConfig(fmt.Sprintf("/config/app.%s.json", GetEnv()), appConfig); err != nil {
 		log.Error(err.Error())
 
-		return &BuilderConfig{}
+		return &BuilderConfig{}, err
 	}
 
-	return appConfig.Builder
+	return appConfig.Builder, nil
 }
