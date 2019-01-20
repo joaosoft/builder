@@ -32,7 +32,6 @@ type Builder struct {
 
 func NewBuilder(options ...BuilderOption) *Builder {
 	config, simpleConfig, err := NewConfig()
-
 	pm := manager.NewManager(manager.WithRunInBackground(true))
 	log := logger.NewLogDefault("builder", logger.DebugLevel)
 	event := make(chan *watcher.Event)
