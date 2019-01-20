@@ -45,7 +45,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		pm:         pm,
 		logger:     log,
 		quit:       make(chan int),
-		config:     config.Builder,
+		config:     &config.Builder,
 	}
 
 	if err == nil {

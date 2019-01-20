@@ -11,7 +11,7 @@ import (
 
 // AppConfig ...
 type AppConfig struct {
-	Builder *BuilderConfig `json:"builder"`
+	Builder BuilderConfig `json:"builder"`
 }
 
 // BuilderConfig ...
@@ -31,9 +31,7 @@ func NewConfig() (*AppConfig, manager.IConfig, error) {
 
 	if err != nil {
 		log.Error(err.Error())
-
-		appConfig.Builder = &BuilderConfig{}
 	}
 
-	return appConfig, simpleConfig, nil
+	return appConfig, simpleConfig, err
 }
