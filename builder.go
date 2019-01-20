@@ -48,7 +48,9 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		config:     &config.Builder,
 	}
 
-	if err == nil {
+	if err != nil {
+		log.Error(err.Error())
+	} else {
 		service.pm.AddConfig("config_app", simpleConfig)
 		level, _ := logger.ParseLevel(config.Builder.Log.Level)
 		log.Debugf("setting log level to %s", level)
