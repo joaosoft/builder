@@ -31,6 +31,8 @@ type Builder struct {
 }
 
 func NewBuilder(options ...BuilderOption) *Builder {
+	config, simpleConfig, err := NewConfig()
+
 	pm := manager.NewManager(manager.WithRunInBackground(true))
 	log := logger.NewLogDefault("builder", logger.DebugLevel)
 	event := make(chan *watcher.Event)
@@ -47,20 +49,15 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		config:     &BuilderConfig{},
 	}
 
-	if service.isLogExternal {
-		service.pm.Reconfigure(manager.WithLogger(service.logger))
+	if err == nil {
+		service.pm.AddConfig("config_app", simpleConfig)
+		level, _ := logger.ParseLevel(config.Builder.Log.Level)
+		log.Debugf("setting log level to %s", level)
+		log.Reconfigure(logger.WithLevel(level))
 	}
 
-	// load configuration File
-	appConfig := &AppConfig{}
-	if simpleConfig, err := manager.NewSimpleConfig(fmt.Sprintf("/config/app.%s.json", GetEnv()), appConfig); err != nil {
-		service.logger.Error(err.Error())
-	} else if appConfig.Builder != nil {
-		service.pm.AddConfig("config_app", simpleConfig)
-		level, _ := logger.ParseLevel(appConfig.Builder.Log.Level)
-		service.logger.Debugf("setting log level to %s", level)
-		service.logger.Reconfigure(logger.WithLevel(level))
-		service.config = appConfig.Builder
+	if service.isLogExternal {
+		service.pm.Reconfigure(manager.WithLogger(service.logger))
 	}
 
 	service.Reconfigure(options...)
