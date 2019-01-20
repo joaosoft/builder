@@ -29,6 +29,8 @@ func NewConfig() *BuilderConfig {
 	appConfig := &AppConfig{}
 	if _, err := manager.NewSimpleConfig(fmt.Sprintf("/config/app.%s.json", GetEnv()), appConfig); err != nil {
 		log.Error(err.Error())
+
+		return &BuilderConfig{}
 	}
 
 	return appConfig.Builder
