@@ -33,20 +33,19 @@ type Builder struct {
 func NewBuilder(options ...BuilderOption) *Builder {
 	config, simpleConfig, err := NewConfig()
 	pm := manager.NewManager(manager.WithRunInBackground(true))
-	log := logger.NewLogDefault("builder", logger.DebugLevel)
 	event := make(chan *watcher.Event)
-
-	w := watcher.NewWatcher(watcher.WithLogger(log), watcher.WithManager(pm), watcher.WithEventChannel(event))
-	pm.AddProcess("watcher", w)
 
 	service := &Builder{
 		event:      event,
 		reloadTime: 1,
 		pm:         pm,
-		logger:     log,
+		logger:     logger.NewLogDefault("builder", logger.DebugLevel),
 		quit:       make(chan int),
 		config:     &config.Builder,
 	}
+
+	w := watcher.NewWatcher(watcher.WithLogger(service.logger), watcher.WithManager(pm), watcher.WithEventChannel(event))
+	pm.AddProcess("watcher", w)
 
 	if err != nil {
 		service.logger.Error(err.Error())
