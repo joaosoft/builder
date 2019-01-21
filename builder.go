@@ -41,7 +41,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		pm:         pm,
 		logger:     logger.NewLogDefault("builder", logger.WarnLevel),
 		quit:       make(chan int),
-		config:     &config.Builder,
+		config:     config.Builder,
 	}
 
 	w := watcher.NewWatcher(watcher.WithLogger(service.logger), watcher.WithManager(pm), watcher.WithEventChannel(event))
@@ -49,7 +49,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 
 	if err != nil {
 		service.logger.Error(err.Error())
-	} else {
+	} else if config.Builder != nil {
 		service.pm.AddConfig("config_app", simpleConfig)
 		level, _ := logger.ParseLevel(config.Builder.Log.Level)
 		service.logger.Debugf("setting log level to %s", level)

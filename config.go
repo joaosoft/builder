@@ -10,7 +10,7 @@ import (
 
 // AppConfig ...
 type AppConfig struct {
-	Builder BuilderConfig `json:"builder"`
+	Builder *BuilderConfig `json:"builder"`
 }
 
 // BuilderConfig ...
