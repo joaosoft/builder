@@ -39,7 +39,7 @@ func NewBuilder(options ...BuilderOption) *Builder {
 		event:      event,
 		reloadTime: 1,
 		pm:         pm,
-		logger:     logger.NewLogDefault("builder", logger.DebugLevel),
+		logger:     logger.NewLogDefault("builder", logger.InfoLevel),
 		quit:       make(chan int),
 		config:     &config.Builder,
 	}
