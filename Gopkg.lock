@@ -79,7 +79,7 @@
   branch = "master"
   name = "github.com/joaosoft/watcher"
   packages = ["."]
-  revision = "fa0b6d279faddcb5de8eebd5cda15f42de33a523"
+  revision = "0b0ce641dd884da4fb93b139c39c94e476363a1b"
 
 [[projects]]
   branch = "master"
