@@ -1,7 +1,6 @@
 package builder
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"sync"
@@ -82,11 +81,11 @@ func (b *Builder) execute() error {
 				b.logger.Info("received shutdown signal")
 				return
 			case <-time.After(time.Duration(b.reloadTime) * time.Second):
-				b.logger.Info("watching changes")
+				b.logger.Info("watching changes...")
 
 				ev := <-b.event
 				if ev.Operation == watcher.OperationChanges {
-					fmt.Println(ev.File)
+					b.logger.Infof("%s file %s", ev.Operation, ev.File)
 					b.build()
 					b.start()
 				}
@@ -158,16 +157,23 @@ func (b *Builder) start() error {
 }
 
 // Start ...
-func (b *Builder) Start(wg *sync.WaitGroup) error {
-	b.started = true
-	if wg != nil {
-		defer wg.Done()
+func (b *Builder) Start(waitGroup ...*sync.WaitGroup) error {
+	var wg *sync.WaitGroup
+
+	if len(waitGroup) == 0 {
+		wg = &sync.WaitGroup{}
+		wg.Add(1)
+	} else {
+		wg = waitGroup[0]
 	}
+
+	defer wg.Done()
 
 	if err := b.pm.Start(); err != nil {
 		return err
 	}
 
+	b.started = true
 	if err := b.execute(); err != nil {
 		return err
 	}
@@ -181,12 +187,19 @@ func (b *Builder) Started() bool {
 }
 
 // Stop ...
-func (b *Builder) Stop(wg *sync.WaitGroup) error {
-	b.started = false
-	if wg != nil {
-		defer wg.Done()
+func (b *Builder) Stop(waitGroup ...*sync.WaitGroup) error {
+	var wg *sync.WaitGroup
+
+	if len(waitGroup) == 0 {
+		wg = &sync.WaitGroup{}
+		wg.Add(1)
+	} else {
+		wg = waitGroup[0]
 	}
 
+	defer wg.Done()
+
+	b.started = false
 	if err := b.pm.Stop(); err != nil {
 		return err
 	}

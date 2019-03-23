@@ -2,20 +2,20 @@
   "builder": {
     "source": "main/main.go",
     "destination": "bin/builder",
-    "reload_time": 1,
+    "reload_time": 5,
     "log": {
-      "level": "info"
+      "level": "debug"
     }
   },
   "watcher": {
-    "reload_time": 1,
+    "reload_time": 5,
     "dirs": {
       "watch":[ "." ],
       "excluded":[ "vendor", "bin" ],
       "extensions": [ "go", "json", "yml" ]
     },
     "log": {
-      "level": "info"
+      "level": "debug"
     }
   },
   "manager": {

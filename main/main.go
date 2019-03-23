@@ -13,12 +13,12 @@ func main() {
 
 	build := builder.NewBuilder(builder.WithReloadTime(1))
 
-	if err := build.Start(nil); err != nil {
+	if err := build.Start(); err != nil {
 		panic(err)
 	}
 
 	<-termChan
-	if err := build.Stop(nil); err != nil {
+	if err := build.Stop(); err != nil {
 		panic(err)
 	}
 }
