@@ -1,7 +1,7 @@
 package main
 
 import (
-	"builder"
+	"github.com/joaosoft/builder"
 	"os"
 	"os/signal"
 	"syscall"
