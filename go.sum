@@ -141,8 +141,8 @@ github.com/joaosoft/logger v0.0.0-20230531142923-753c0a3e836a h1:O53XPtsnwnmBsGp
 github.com/joaosoft/logger v0.0.0-20230531142923-753c0a3e836a/go.mod h1:xhFyqfT2p8E7qK6UXhv2U0tFuMOTeOR7Un1v5hoX7Gs=
 github.com/joaosoft/manager v0.0.0-20230531144045-7e3c8790d395 h1:6qOLZSHusKD+tMSJbStO+iXGCAhJ3WYYrfqAsiM/nKw=
 github.com/joaosoft/manager v0.0.0-20230531144045-7e3c8790d395/go.mod h1:GYebm9SVc7PdFY11laaRNT6rdTpHXHip0J4VfW9QCHo=
-github.com/joaosoft/watcher v0.0.0-20230531144929-8ef9321d8670 h1:6zNGFzv3ELv6WnrEjgGffS8qSJQvd/BhlNk1Bv0dZbw=
-github.com/joaosoft/watcher v0.0.0-20230531144929-8ef9321d8670/go.mod h1:JF/F4U9GtbW8oWGWQcwkvtEnOtRp2TEZ6JJrDezSrKk=
+github.com/joaosoft/watcher v0.0.0-20230602090551-64d3ca41f4fd h1:We9a26rH9tjYwXUUfKhXJpcZXVdws+I4kzmK4hYtjNA=
+github.com/joaosoft/watcher v0.0.0-20230602090551-64d3ca41f4fd/go.mod h1:JF/F4U9GtbW8oWGWQcwkvtEnOtRp2TEZ6JJrDezSrKk=
 github.com/joaosoft/web v0.0.0-20230531143830-cd31d8a8c35e h1:6iZ5BpR2d45gA/0mFiVD/TdE2MrMzuep90ts8lHg6QU=
 github.com/joaosoft/web v0.0.0-20230531143830-cd31d8a8c35e/go.mod h1:o/AtSUa5ODbcVrYZr04rbedGYGsmOxta7OJD46YdbD0=
 github.com/joaosoft/writers v0.0.0-20230531142123-83465954fcda h1:2qopUF9Y7UHkjFcZnmSD1nqlgQvZ0m15zdQL5UjemFE=

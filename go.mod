@@ -6,7 +6,7 @@ require (
 	github.com/joaosoft/errors v0.0.0-20230531141818-ebb38600b462
 	github.com/joaosoft/logger v0.0.0-20230531142923-753c0a3e836a
 	github.com/joaosoft/manager v0.0.0-20230531144045-7e3c8790d395
-	github.com/joaosoft/watcher v0.0.0-20230531144929-8ef9321d8670
+	github.com/joaosoft/watcher v0.0.0-20230602090551-64d3ca41f4fd
 )
 
 require (
